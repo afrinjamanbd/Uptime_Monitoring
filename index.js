@@ -7,6 +7,7 @@
  */
 // dependencies
 const http = require('http');
+const url = require('url');
 
 // app object 
 const app = {} ; 
@@ -25,7 +26,20 @@ app.createServer = () => {
 //handles request response
 app.handleReqRes = (req, res) =>{
 
-    res.end('hello mlllllllmmmm')
+    const parseURL = url.parse(req.url, true);
+    console.log(parseURL);
+    const path = parseURL.path
+    console.log(path);
+    const trimmedpath = path.replace(/^\/+|\/+$/g, '');
+    console.log(trimmedpath);
+    const method = req.method.toLowerCase();
+    console.log(method)
+    const queryStringObject = parseURL.query;
+    console.log(queryStringObject)
+    const headersObject = req.headers;
+    console.log(headersObject)
+    res.end('Hello :: Node.js ')
+
 };
 
 //start the server
