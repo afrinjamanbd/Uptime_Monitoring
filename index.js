@@ -6,8 +6,9 @@
  *
  */
 // dependencies
+const { read } = require('fs');
 const http = require('http');
-const url = require('url');
+const { handleReqRes } = require('./helpers/handleReqRes');
 
 // app object 
 const app = {} ; 
@@ -24,23 +25,8 @@ app.createServer = () => {
 };
 
 //handles request response
-app.handleReqRes = (req, res) =>{
+app.handleReqRes = handleReqRes;
 
-    const parseURL = url.parse(req.url, true);
-    console.log(parseURL);
-    const path = parseURL.path
-    console.log(path);
-    const trimmedpath = path.replace(/^\/+|\/+$/g, '');
-    console.log(trimmedpath);
-    const method = req.method.toLowerCase();
-    console.log(method)
-    const queryStringObject = parseURL.query;
-    console.log(queryStringObject)
-    const headersObject = req.headers;
-    console.log(headersObject)
-    res.end('Hello :: Node.js ')
-
-};
 
 //start the server
 app.createServer();
